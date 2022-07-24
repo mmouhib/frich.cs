@@ -1,9 +1,13 @@
-﻿namespace frich.Models;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace frich.Models;
 
 public class Person
 {
-    public int PersonId { get; set; }
-    public string Username { get; set; } = default!;
-    public string Email { get; set; } = default!;
-    public string Password { get; set; } = default!;
+    [Key] public int PersonId { get; set; }
+    [Required] public string Username { get; set; } = default!;
+    [Required] public string Email { get; set; } = default!;
+    [Required] public string Password { get; set; } = default!;
+
+    public List<Match> Matches { get; set; }
 }
