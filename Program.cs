@@ -1,11 +1,12 @@
 using frich.Data;
+using frich.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 {
     builder.Services.AddControllers();
-    builder.Services.AddTransient<IFrichRepo, SqlFrichRepo>();
+    builder.Services.AddTransient<IFrichRepo<Person>, SqlFrichRepo>();
 
     var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 

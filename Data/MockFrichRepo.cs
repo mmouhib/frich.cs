@@ -2,7 +2,7 @@
 
 namespace frich.Data;
 
-public class MockFrichRepo : IFrichRepo
+public class MockFrichRepo : IFrichRepo<Person>
 {
     public IEnumerable<Person> GetAllPersons()
     {

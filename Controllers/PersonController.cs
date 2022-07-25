@@ -10,10 +10,10 @@ namespace frich.Controllers;
 [ApiController]
 public class PersonController : ControllerBase
 {
-    private readonly IFrichRepo _repository;
+    private readonly IFrichRepo<Person> _repository;
     private readonly IMapper _mapper;
 
-    public PersonController(IFrichRepo repo, IMapper mapper)
+    public PersonController(IFrichRepo<Person> repo, IMapper mapper)
     {
         _repository = repo;
         _mapper = mapper;

@@ -1,12 +1,10 @@
-﻿using frich.Models;
+﻿namespace frich.Data;
 
-namespace frich.Data;
-
-public interface IFrichRepo
+public interface IFrichRepo<TEntity>
 {
-    IEnumerable<Person> GetAllPersons();
-    Person GetPersonById(int id);
-    void AddPerson(Person person);
-    void DeletePerson(Person person);
-    void EditPerson(Person person);
+    IEnumerable<TEntity> GetAllPersons();
+    TEntity GetPersonById(int id);
+    void AddPerson(TEntity entityInstance);
+    void DeletePerson(TEntity entityInstance);
+    void EditPerson(TEntity entityInstance);
 }

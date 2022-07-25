@@ -2,7 +2,7 @@
 
 namespace frich.Data;
 
-public class SqlFrichRepo : IFrichRepo
+public class SqlFrichRepo : IFrichRepo<Person>
 {
     private readonly FrichDbContext _context;
 
