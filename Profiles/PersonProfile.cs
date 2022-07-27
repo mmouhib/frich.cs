@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using frich.DataTransferObjects.PersonDtos;
+using frich.DataTransferObjects.PersonDto;
 using frich.Models;
 
 namespace frich.Profiles;
@@ -12,5 +12,6 @@ public class PersonProfile : Profile
     public PersonProfile()
     {
         CreateMap<Person, PersonGetDto>();
+        CreateMap<PersonPostDto, Person>();
     }
 }

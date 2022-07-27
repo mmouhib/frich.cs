@@ -11,6 +11,11 @@ public class SqlFrichRepo : IFrichRepo<Person>
         _context = context;
     }
 
+    public bool SaveMigrations()
+    {
+        return _context.SaveChanges() >= 0;
+    }
+
     public IEnumerable<Person> GetAllPersons()
     {
         return _context.Persons.ToList();
@@ -23,7 +28,15 @@ public class SqlFrichRepo : IFrichRepo<Person>
 
     public void AddPerson(Person person)
     {
-        throw new NotImplementedException();
+        try
+        {
+            _context.Add(person);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 
     public void DeletePerson(Person person)

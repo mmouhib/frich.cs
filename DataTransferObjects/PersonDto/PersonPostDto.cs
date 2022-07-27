@@ -1,8 +1,7 @@
-﻿namespace frich.DataTransferObjects.PersonDtos;
+﻿namespace frich.DataTransferObjects.PersonDto;
 
-public class PersonGetDto
+public class PersonPostDto
 {
-    public int PersonId { get; set; }
     public string Username { get; set; }
     public string Email { get; set; }
     public string Password { get; set; }

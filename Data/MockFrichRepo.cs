@@ -4,6 +4,11 @@ namespace frich.Data;
 
 public class MockFrichRepo : IFrichRepo<Person>
 {
+    public bool SaveMigrations()
+    {
+        throw new NotImplementedException();
+    }
+
     public IEnumerable<Person> GetAllPersons()
     {
         return new List<Person>

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using frich.Data;
-using frich.DataTransferObjects.PersonDtos;
+using frich.DataTransferObjects.PersonDto;
 using frich.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,9 +22,14 @@ public class PersonController : ControllerBase
     [HttpGet]
     public ActionResult<IEnumerable<PersonGetDto>> GetAllPlayers()
     {
-        //todo: treat no persons case
         var persons = _repository.GetAllPersons();
-        return Ok(_mapper.Map<IEnumerable<PersonGetDto>>(persons));
+
+        if (persons.Any())
+        {
+            return Ok(_mapper.Map<IEnumerable<PersonGetDto>>(persons));
+        }
+
+        return NotFound();
     }
 
     [HttpGet("{id}")]
@@ -38,5 +43,15 @@ public class PersonController : ControllerBase
         }
 
         return NotFound();
+    }
+
+    [HttpPost]
+    public ActionResult<PersonGetDto> AddPerson(PersonPostDto person)
+    {
+        var mappedPerson = _mapper.Map<Person>(person);
+        _repository.AddPerson(mappedPerson);
+        _repository.SaveMigrations();
+
+        return Ok(mappedPerson);
     }
 }
