@@ -1,12 +1,13 @@
 ﻿using frich.Models;
+using frich.Data.Interfaces;
 
 namespace frich.Data;
 
-public class SqlFrichRepo : IFrichRepo<Person>
+public class SqlPersonRepo : IPersonRepo
 {
     private readonly FrichDbContext _context;
 
-    public SqlFrichRepo(FrichDbContext context)
+    public SqlPersonRepo(FrichDbContext context)
     {
         _context = context;
     }
@@ -16,17 +17,17 @@ public class SqlFrichRepo : IFrichRepo<Person>
         return _context.SaveChanges() >= 0;
     }
 
-    public IEnumerable<Person> GetAllPersons()
+    public IEnumerable<Person> GetAll()
     {
         return _context.Persons.ToList();
     }
 
-    public Person GetPersonById(int id)
+    public Person GetById(int id)
     {
         return _context.Persons.FirstOrDefault(person => person.PersonId == id);
     }
 
-    public void AddPerson(Person person)
+    public void Add(Person person)
     {
         try
         {
@@ -39,12 +40,12 @@ public class SqlFrichRepo : IFrichRepo<Person>
         }
     }
 
-    public void DeletePerson(Person person)
+    public void Delete(Person person)
     {
         throw new NotImplementedException();
     }
 
-    public void EditPerson(Person person)
+    public void Edit(Person person)
     {
         throw new NotImplementedException();
     }

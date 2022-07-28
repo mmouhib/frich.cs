@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using frich.Data;
+using frich.Data.Interfaces;
 using frich.DataTransferObjects.PersonDto;
 using frich.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +10,10 @@ namespace frich.Controllers;
 [ApiController]
 public class PersonController : ControllerBase
 {
-    private readonly IFrichRepo<Person> _repository;
+    private readonly IPersonRepo _repository;
     private readonly IMapper _mapper;
 
-    public PersonController(IFrichRepo<Person> repo, IMapper mapper)
+    public PersonController(IPersonRepo repo, IMapper mapper)
     {
         _repository = repo;
         _mapper = mapper;
@@ -22,7 +22,7 @@ public class PersonController : ControllerBase
     [HttpGet]
     public ActionResult<IEnumerable<PersonGetDto>> GetAllPlayers()
     {
-        var persons = _repository.GetAllPersons();
+        var persons = _repository.GetAll();
 
         if (persons.Any())
         {
@@ -35,7 +35,7 @@ public class PersonController : ControllerBase
     [HttpGet("{id}")]
     public ActionResult<PersonGetDto> GetPersonById(int id)
     {
-        var wantedPerson = _repository.GetPersonById(id);
+        var wantedPerson = _repository.GetById(id);
 
         if (wantedPerson != null)
         {
@@ -49,7 +49,7 @@ public class PersonController : ControllerBase
     public ActionResult<PersonGetDto> AddPerson(PersonPostDto person)
     {
         var mappedPerson = _mapper.Map<Person>(person);
-        _repository.AddPerson(mappedPerson);
+        _repository.Add(mappedPerson);
         _repository.SaveMigrations();
 
         return Ok(mappedPerson);

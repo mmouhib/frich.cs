@@ -2,14 +2,14 @@
 
 namespace frich.Data;
 
-public class MockFrichRepo : IFrichRepo<Person>
+public class MockPersonRepo : IFrichRepo<Person>
 {
     public bool SaveMigrations()
     {
         throw new NotImplementedException();
     }
 
-    public IEnumerable<Person> GetAllPersons()
+    public IEnumerable<Person> GetAll()
     {
         return new List<Person>
         {
@@ -31,7 +31,7 @@ public class MockFrichRepo : IFrichRepo<Person>
         };
     }
 
-    public Person GetPersonById(int id)
+    public Person GetById(int id)
     {
         return new Person
         {
@@ -42,17 +42,17 @@ public class MockFrichRepo : IFrichRepo<Person>
         };
     }
 
-    public void AddPerson(Person person)
+    public void Add(Person person)
     {
         throw new NotImplementedException();
     }
 
-    public void DeletePerson(Person person)
+    public void Delete(Person person)
     {
         throw new NotImplementedException();
     }
 
-    public void EditPerson(Person person)
+    public void Edit(Person person)
     {
         throw new NotImplementedException();
     }

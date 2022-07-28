@@ -1,4 +1,5 @@
 using frich.Data;
+using frich.Data.Interfaces;
 using frich.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,7 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 {
     builder.Services.AddControllers();
-    builder.Services.AddTransient<IFrichRepo<Person>, SqlFrichRepo>();
+    builder.Services.AddTransient<IPersonRepo, SqlPersonRepo>();
+    //builder.Services.AddTransient<IMatchesRepo, SqlMatchRepo>();
 
     var connectionString = builder.Configuration["DatabaseConnectionString"];
 
