@@ -6,7 +6,8 @@
 #custom
 Requests
 .idea
-appsettings.json
+*.http
+*.https
 
 # User-specific files
 *.rsuser
@@ -366,3 +367,4 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Migrations

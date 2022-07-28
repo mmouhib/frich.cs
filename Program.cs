@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
     builder.Services.AddControllers();
     builder.Services.AddTransient<IFrichRepo<Person>, SqlFrichRepo>();
 
-    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    var connectionString = builder.Configuration["DatabaseConnectionString"];
 
     builder.Services.AddDbContext<FrichDbContext>(options => options.UseNpgsql(connectionString));
 
