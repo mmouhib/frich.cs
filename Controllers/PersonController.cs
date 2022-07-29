@@ -32,7 +32,7 @@ public class PersonController : ControllerBase
         return NotFound();
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{id}", Name = "GetPersonById")]
     public ActionResult<PersonGetDto> GetPersonById(int id)
     {
         var wantedPerson = _repository.GetById(id);
@@ -48,10 +48,13 @@ public class PersonController : ControllerBase
     [HttpPost]
     public ActionResult<PersonGetDto> AddPerson(PersonPostDto person)
     {
-        var mappedPerson = _mapper.Map<Person>(person);
+        Person mappedPerson = _mapper.Map<Person>(person);
         _repository.Add(mappedPerson);
         _repository.SaveMigrations();
 
-        return Ok(mappedPerson);
+        PersonGetDto getResult = _mapper.Map<PersonGetDto>(mappedPerson);
+
+        // CreatedAtRoute is used to generate the request URI after succeeding in the POST request
+        return CreatedAtRoute(nameof(GetPersonById), new { id = getResult.PersonId }, getResult);
     }
 }

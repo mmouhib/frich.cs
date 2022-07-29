@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 {
     builder.Services.AddControllers();
-    builder.Services.AddTransient<IPersonRepo, SqlPersonRepo>();
+    builder.Services.AddTransient<IPersonRepo, SqlFrichRepo>();
     //builder.Services.AddTransient<IMatchesRepo, SqlMatchRepo>();
 
     var connectionString = builder.Configuration["DatabaseConnectionString"];

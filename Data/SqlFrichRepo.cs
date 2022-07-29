@@ -3,11 +3,11 @@ using frich.Data.Interfaces;
 
 namespace frich.Data;
 
-public class SqlPersonRepo : IPersonRepo
+public class SqlFrichRepo : IPersonRepo
 {
     private readonly FrichDbContext _context;
 
-    public SqlPersonRepo(FrichDbContext context)
+    public SqlFrichRepo(FrichDbContext context)
     {
         _context = context;
     }
