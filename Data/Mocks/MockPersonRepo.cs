@@ -1,8 +1,9 @@
-﻿using frich.Models;
+﻿using frich.Data.Interfaces;
+using frich.Models;
 
-namespace frich.Data;
+namespace frich.Data.Mocks;
 
-public class MockPersonRepo : IFrichRepo<Person>
+public class MockPersonRepo : IPersonRepo
 {
     public bool SaveMigrations()
     {
@@ -52,7 +53,7 @@ public class MockPersonRepo : IFrichRepo<Person>
         throw new NotImplementedException();
     }
 
-    public void Edit(Person person)
+    public void Update(Person person)
     {
         throw new NotImplementedException();
     }

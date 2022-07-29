@@ -1,4 +1,4 @@
-﻿namespace frich.Data;
+﻿namespace frich.Data.Interfaces;
 
 public interface IFrichRepo<TEntity>
 {
@@ -7,5 +7,5 @@ public interface IFrichRepo<TEntity>
     TEntity GetById(int id);
     void Add(TEntity entityInstance);
     void Delete(TEntity entityInstance);
-    void Edit(TEntity entityInstance);
+    void Update(TEntity entityInstance);
 }

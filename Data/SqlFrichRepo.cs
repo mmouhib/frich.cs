@@ -45,7 +45,7 @@ public class SqlFrichRepo : IPersonRepo
         throw new NotImplementedException();
     }
 
-    public void Edit(Person person)
+    public void Update(Person person)
     {
         throw new NotImplementedException();
     }

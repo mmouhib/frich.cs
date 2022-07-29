@@ -54,7 +54,7 @@ public class PersonController : ControllerBase
 
         PersonGetDto getResult = _mapper.Map<PersonGetDto>(mappedPerson);
 
-        // CreatedAtRoute is used to generate the request URI after succeeding in the POST request
+        // CreatedAtRoute generates the request URI after making a POST request
         return CreatedAtRoute(nameof(GetPersonById), new { id = getResult.PersonId }, getResult);
     }
 }
