@@ -1,4 +1,4 @@
-﻿using frich.Models;
+﻿using frich.Entities;
 using frich.Data.Interfaces;
 
 namespace frich.Data;

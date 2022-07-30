@@ -1,4 +1,4 @@
-﻿using frich.Models;
+﻿using frich.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace frich.Data;

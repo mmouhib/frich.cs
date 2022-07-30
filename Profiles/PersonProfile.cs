@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using frich.DataTransferObjects.PersonDto;
-using frich.Models;
+using frich.Entities;
 
 namespace frich.Profiles;
 

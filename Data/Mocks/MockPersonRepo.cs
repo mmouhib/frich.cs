@@ -1,5 +1,5 @@
 ﻿using frich.Data.Interfaces;
-using frich.Models;
+using frich.Entities;
 
 namespace frich.Data.Mocks;
 

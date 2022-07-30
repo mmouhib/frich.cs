@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace frich.Models;
+namespace frich.Entities;
 
 public class Person
 {
@@ -15,5 +15,4 @@ public class Person
     {
         return $"Person: {PersonId} / {Username} / {Email} / {Password}";
     }
-
 }
