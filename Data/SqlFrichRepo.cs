@@ -47,6 +47,7 @@ public class SqlFrichRepo : IPersonRepo
 
     public void Update(Person person)
     {
-        throw new NotImplementedException();
+        //optional (method needs no implementation, it is available only
+        //to
     }
 }
