@@ -10,4 +10,10 @@ public class Person
     [Required] public string Password { get; set; } = default!;
 
     public List<Match> Matches { get; set; }
+
+    public override string ToString()
+    {
+        return $"Person: {PersonId} / {Username} / {Email} / {Password}";
+    }
+
 }

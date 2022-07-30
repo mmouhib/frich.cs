@@ -2,10 +2,12 @@
 
 //this class is the form of results of get requests
 //on Person entity
-public class PersonGetDto
+public class PersonGetDto : BasePersonDto
 {
     public int PersonId { get; set; }
-    public string Username { get; set; }
-    public string Email { get; set; }
-    public string Password { get; set; }
+
+    public override string ToString()
+    {
+        return $"PersonGetDto: {PersonId} / {Username} / {Email} / {Password}";
+    }
 }
