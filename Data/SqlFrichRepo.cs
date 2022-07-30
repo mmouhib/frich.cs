@@ -29,25 +29,21 @@ public class SqlFrichRepo : IPersonRepo
 
     public void Add(Person person)
     {
-        try
-        {
-            _context.Add(person);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
+        if (person == null) throw new ArgumentNullException(nameof(person));
+
+        _context.Add(person);
     }
 
     public void Delete(Person person)
     {
-        throw new NotImplementedException();
+        if (person == null) throw new ArgumentNullException(nameof(person));
+
+        _context.Persons.Remove(person);
     }
 
     public void Update(Person person)
     {
-        //optional (method needs no implementation, it is available only
-        //to
+        // optional (method needs no implementation,
+        // it is available only to follow conventions
     }
 }

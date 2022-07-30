@@ -2,8 +2,8 @@
 using frich.Data.Interfaces;
 using frich.DataTransferObjects.PersonDto;
 using frich.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Design;
 
 namespace frich.Controllers;
 
@@ -27,7 +27,7 @@ public class PersonController : ControllerBase
 
         if (persons.Any()) return Ok(_mapper.Map<IEnumerable<PersonGetDto>>(persons));
 
-        // 'NotFound' and 'Ok' methods are coming from parent (base) class ControllerBase
+        // 'NotFound' and 'Ok' methods are from parent class ControllerBase
         return NotFound();
     }
 
@@ -58,14 +58,12 @@ public class PersonController : ControllerBase
     [HttpPut("{id}")]
     public ActionResult UpdatePerson(int id, PersonUpdateDto personToUpdate)
     {
-
         // Checks if the data sent in the request exists in the database before changing it.
-        if (personToUpdate == null) return NotFound();
-
         var personResultFromRepo = _repository.GetById(id);
+        if (personResultFromRepo == null) return NotFound();
 
-        // Here we don't use the generic Map method because the source and the destination 
-        // (personToUpdate, personResultFromRepo) both contain data, but when using the generic form,
+        // Here we don't use the generic Map method because the source (personToUpdate) and the 
+        // destination (personResultFromRepo) both contain data, but when using the generic form,
         // the variable inside the generic is new and will contain the new data.
         _mapper.Map(personToUpdate, personResultFromRepo);
 
@@ -74,6 +72,40 @@ public class PersonController : ControllerBase
         _repository.Update(personResultFromRepo);
 
         _repository.SaveMigrations();
+
+        return NoContent();
+    }
+
+    [HttpPatch("{id}")]
+    public ActionResult PatchPerson(int id, JsonPatchDocument<PersonUpdateDto> patchData)
+    {
+        var personResultFromRepo = _repository.GetById(id);
+        if (personResultFromRepo == null) return NotFound();
+
+        var personToPatch = _mapper.Map<PersonUpdateDto>(personResultFromRepo);
+
+        patchData.ApplyTo(personToPatch, ModelState);
+
+        if (!TryValidateModel(personToPatch)) return ValidationProblem(ModelState);
+
+        _mapper.Map(personToPatch, personResultFromRepo);
+
+        _repository.SaveMigrations();
+
+        _repository.Update(personResultFromRepo);
+
+        return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    public ActionResult DeletePerson(int id)
+    {
+        var personToDelete = _repository.GetById(id);
+        if (personToDelete == null) return NotFound();
+
+        _repository.Delete(personToDelete);
+        _repository.SaveMigrations();
+
 
         return NoContent();
     }

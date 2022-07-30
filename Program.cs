@@ -1,7 +1,7 @@
 using frich.Data;
 using frich.Data.Interfaces;
-using frich.Models;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +15,11 @@ var builder = WebApplication.CreateBuilder(args);
     builder.Services.AddDbContext<FrichDbContext>(options => options.UseNpgsql(connectionString));
 
     builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+    builder.Services.AddControllers().AddNewtonsoftJson(s =>
+    {
+        s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+    });
 }
 
 var app = builder.Build();

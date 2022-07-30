@@ -14,5 +14,6 @@ public class PersonProfile : Profile
         CreateMap<Person, PersonGetDto>();
         CreateMap<PersonPostDto, Person>();
         CreateMap<PersonUpdateDto, Person>();
+        CreateMap<Person, PersonUpdateDto>();
     }
 }
