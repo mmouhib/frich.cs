@@ -52,10 +52,6 @@ public class PersonController : ControllerBase
         ValidationResult validationResult = validator.Validate(basePerson);
 
         // todo: validate the rest of the models and Dtos
-        if (!validationResult.IsValid)
-        {
-            throw new Exception();
-        }
 
         Person mappedPerson = _mapper.Map<Person>(basePerson);
         _repository.Add(mappedPerson);

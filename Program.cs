@@ -1,6 +1,8 @@
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using frich.Data;
 using frich.Data.Interfaces;
+using frich.Validators.PersonValidators;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Serialization;
 
@@ -22,7 +24,10 @@ var builder = WebApplication.CreateBuilder(args);
         s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
     });
 
-    builder.Services.AddFluentValidation();
+    builder.Services.AddFluentValidation(
+        config => config.RegisterValidatorsFromAssemblyContaining<Program>()
+        );
+    //builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 }
 
 var app = builder.Build();
