@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using FluentValidation.Results;
 using frich.Data.Interfaces;
 using frich.DataTransferObjects.PersonDto;
 using frich.Entities;
+using frich.Validators.PersonValidators;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
@@ -44,6 +46,17 @@ public class PersonController : ControllerBase
     [HttpPost]
     public ActionResult<PersonGetDto> AddPerson(PersonPostDto basePerson)
     {
+
+        var validator = new PersonValidator();
+
+        ValidationResult validationResult = validator.Validate(basePerson);
+
+        // todo: validate the rest of the models and Dtos
+        if (!validationResult.IsValid)
+        {
+            throw new Exception();
+        }
+
         Person mappedPerson = _mapper.Map<Person>(basePerson);
         _repository.Add(mappedPerson);
         _repository.SaveMigrations();
@@ -51,7 +64,7 @@ public class PersonController : ControllerBase
         PersonGetDto getResult = _mapper.Map<PersonGetDto>(mappedPerson);
 
         // CreatedAtRoute generates the request URI after making a POST request.
-        return CreatedAtRoute(nameof(GetPersonById), new {id = getResult.PersonId}, getResult);
+        return CreatedAtRoute(nameof(GetPersonById), new { id = getResult.PersonId }, getResult);
     }
 
 

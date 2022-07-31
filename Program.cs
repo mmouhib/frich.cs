@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using frich.Data;
 using frich.Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,8 @@ var builder = WebApplication.CreateBuilder(args);
     {
         s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
     });
+
+    builder.Services.AddFluentValidation();
 }
 
 var app = builder.Build();
