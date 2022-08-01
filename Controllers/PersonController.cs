@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
-using FluentValidation.Results;
 using frich.Data.Interfaces;
 using frich.DataTransferObjects.PersonDto;
 using frich.Entities;
-using frich.Validators.PersonValidators;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
@@ -44,12 +42,8 @@ public class PersonController : ControllerBase
     }
 
     [HttpPost]
-    public ActionResult<PersonGetDto> AddPerson(PersonPostDto basePerson)
+    public ActionResult<PersonGetDto> AddPerson(PersonSendDto basePerson)
     {
-
-        var validator = new PersonValidator();
-
-        ValidationResult validationResult = validator.Validate(basePerson);
 
         // todo: validate the rest of the models and Dtos
 
@@ -65,7 +59,7 @@ public class PersonController : ControllerBase
 
 
     [HttpPut("{id}")]
-    public ActionResult UpdatePerson(int id, PersonUpdateDto personToUpdate)
+    public ActionResult UpdatePerson(int id, PersonSendDto personToUpdate)
     {
         // Checks if the data sent in the request exists in the database before changing it.
         var personResultFromRepo = _repository.GetById(id);
@@ -86,12 +80,12 @@ public class PersonController : ControllerBase
     }
 
     [HttpPatch("{id}")]
-    public ActionResult PatchPerson(int id, JsonPatchDocument<PersonUpdateDto> patchData)
+    public ActionResult PatchPerson(int id, JsonPatchDocument<PersonSendDto> patchData)
     {
         var personResultFromRepo = _repository.GetById(id);
         if (personResultFromRepo == null) return NotFound();
 
-        var personToPatch = _mapper.Map<PersonUpdateDto>(personResultFromRepo);
+        var personToPatch = _mapper.Map<PersonSendDto>(personResultFromRepo);
 
         patchData.ApplyTo(personToPatch, ModelState);
 

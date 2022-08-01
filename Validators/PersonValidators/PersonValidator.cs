@@ -1,15 +1,12 @@
 ﻿using FluentValidation;
-using frich.DataTransferObjects.PersonDto;
 using frich.Entities;
 
+namespace frich.Validators.PersonValidators;
 
-namespace frich.Validators.PersonValidators
+public class PersonValidator : AbstractValidator<Person>
 {
-    public class PersonValidator : AbstractValidator<PersonPostDto>
+    public PersonValidator()
     {
-        public PersonValidator()
-        {
-            RuleFor(person => person.Username).NotEmpty();
-        }
+        RuleFor(person => person.Username).NotEmpty();
     }
 }

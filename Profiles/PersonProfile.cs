@@ -12,8 +12,7 @@ public class PersonProfile : Profile
     public PersonProfile()
     {
         CreateMap<Person, PersonGetDto>();
-        CreateMap<PersonPostDto, Person>();
-        CreateMap<PersonUpdateDto, Person>();
-        CreateMap<Person, PersonUpdateDto>();
+        CreateMap<PersonSendDto, Person>();
+        CreateMap<Person, PersonSendDto>();
     }
 }
