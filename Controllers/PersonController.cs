@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using frich.Data.Interfaces;
+using frich.Data.UnitOfWork;
 using frich.DataTransferObjects.PersonDto;
 using frich.Entities;
 using Microsoft.AspNetCore.JsonPatch;
@@ -11,20 +12,22 @@ namespace frich.Controllers;
 [ApiController]
 public class PersonController : ControllerBase
 {
-    private readonly IPersonRepo _repository;
+    //private readonly IPersonRepo _repository;
     private readonly IMapper _mapper;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public PersonController(IPersonRepo repo, IMapper mapper)
+    public PersonController(IPersonRepo repo, IMapper mapper, IUnitOfWork unitOfWork)
     {
-        _repository = repo;
+        //_repository = repo;
         _mapper = mapper;
+        _unitOfWork = unitOfWork;
     }
 
     [HttpGet]
     public ActionResult<IEnumerable<PersonGetDto>> GetAllPlayers()
     {
-        var persons = _repository.GetAll();
-
+        var persons = _unitOfWork.PersonRepository.GetAll();
+        
         if (persons.Any()) return Ok(_mapper.Map<IEnumerable<PersonGetDto>>(persons));
 
         // 'NotFound' and 'Ok' methods are from parent class ControllerBase
@@ -34,7 +37,7 @@ public class PersonController : ControllerBase
     [HttpGet("{id}", Name = "GetPersonById")]
     public ActionResult<PersonGetDto> GetPersonById(int id)
     {
-        var wantedPerson = _repository.GetById(id);
+        var wantedPerson = _unitOfWork.PersonRepository.GetById(id);
 
         if (wantedPerson != null) return _mapper.Map<PersonGetDto>(wantedPerson);
 
@@ -48,8 +51,8 @@ public class PersonController : ControllerBase
         // todo: validate the rest of the models and Dtos
 
         Person mappedPerson = _mapper.Map<Person>(basePerson);
-        _repository.Add(mappedPerson);
-        _repository.SaveMigrations();
+        _unitOfWork.PersonRepository.Add(mappedPerson);
+        _unitOfWork.Commit();
 
         PersonGetDto getResult = _mapper.Map<PersonGetDto>(mappedPerson);
 
@@ -62,7 +65,7 @@ public class PersonController : ControllerBase
     public ActionResult UpdatePerson(int id, PersonSendDto personToUpdate)
     {
         // Checks if the data sent in the request exists in the database before changing it.
-        var personResultFromRepo = _repository.GetById(id);
+        var personResultFromRepo = _unitOfWork.PersonRepository.GetById(id);
         if (personResultFromRepo == null) return NotFound();
 
         // Here we don't use the generic Map method because the source (personToUpdate) and the 
@@ -72,9 +75,9 @@ public class PersonController : ControllerBase
 
         // Optional: this call is only made to follow conventions, and it does nothing,
         // the update is done in the Mapping in the previous line.
-        _repository.Update(personResultFromRepo);
+        _unitOfWork.PersonRepository.Update(personResultFromRepo);
 
-        _repository.SaveMigrations();
+        _unitOfWork.Commit();
 
         return NoContent();
     }
@@ -82,7 +85,7 @@ public class PersonController : ControllerBase
     [HttpPatch("{id}")]
     public ActionResult PatchPerson(int id, JsonPatchDocument<PersonSendDto> patchData)
     {
-        var personResultFromRepo = _repository.GetById(id);
+        var personResultFromRepo = _unitOfWork.PersonRepository.GetById(id);
         if (personResultFromRepo == null) return NotFound();
 
         var personToPatch = _mapper.Map<PersonSendDto>(personResultFromRepo);
@@ -93,9 +96,9 @@ public class PersonController : ControllerBase
 
         _mapper.Map(personToPatch, personResultFromRepo);
 
-        _repository.SaveMigrations();
+        _unitOfWork.Commit();
 
-        _repository.Update(personResultFromRepo);
+        _unitOfWork.PersonRepository.Update(personResultFromRepo);
 
         return NoContent();
     }
@@ -103,11 +106,11 @@ public class PersonController : ControllerBase
     [HttpDelete("{id}")]
     public ActionResult DeletePerson(int id)
     {
-        var personToDelete = _repository.GetById(id);
+        var personToDelete = _unitOfWork.PersonRepository.GetById(id);
         if (personToDelete == null) return NotFound();
 
-        _repository.Delete(personToDelete);
-        _repository.SaveMigrations();
+        _unitOfWork.PersonRepository.Delete(personToDelete);
+        _unitOfWork.Commit();
 
 
         return NoContent();

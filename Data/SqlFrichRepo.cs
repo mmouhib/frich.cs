@@ -12,11 +12,6 @@ public class SqlFrichRepo : IPersonRepo
         _context = context;
     }
 
-    public bool SaveMigrations()
-    {
-        return _context.SaveChanges() >= 0;
-    }
-
     public IEnumerable<Person> GetAll()
     {
         return _context.Persons.ToList();

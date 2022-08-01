@@ -2,7 +2,6 @@
 
 public interface IFrichRepo<TEntity>
 {
-    bool SaveMigrations();
     IEnumerable<TEntity> GetAll();
     TEntity GetById(int id);
     void Add(TEntity entityInstance);

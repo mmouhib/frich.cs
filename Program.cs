@@ -1,6 +1,7 @@
 using FluentValidation.AspNetCore;
 using frich.Data;
 using frich.Data.Interfaces;
+using frich.Data.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Serialization;
 
@@ -8,11 +9,17 @@ var builder = WebApplication.CreateBuilder(args);
 
 {
     builder.Services.AddControllers();
+
     builder.Services.AddTransient<IPersonRepo, SqlFrichRepo>();
+
+    builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
     var connectionString = builder.Configuration["DatabaseConnectionString"];
 
-    builder.Services.AddDbContext<FrichDbContext>(options => options.UseNpgsql(connectionString));
+    builder.Services.AddDbContext<FrichDbContext>(options =>
+    {
+        options.UseNpgsql(connectionString);
+    });
 
     builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -21,8 +28,10 @@ var builder = WebApplication.CreateBuilder(args);
         s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
     });
 
-    builder.Services
-        .AddFluentValidation(config => config.RegisterValidatorsFromAssemblyContaining<Program>());
+    builder.Services.AddFluentValidation(config =>
+    {
+        config.RegisterValidatorsFromAssemblyContaining<Program>();
+    });
 }
 
 var app = builder.Build();

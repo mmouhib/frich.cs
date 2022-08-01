@@ -1,9 +1,10 @@
-﻿namespace frich.Data.UnitOfWork;
+﻿using frich.Data.Interfaces;
 
-//todo: not implemented!
-public interface IUnitOfWork
+namespace frich.Data.UnitOfWork;
+
+public interface IUnitOfWork : IDisposable
 {
-    void Commit();
+    IPersonRepo PersonRepository { get; set; }
+    int Commit();
     void RejectChanges();
-    void Dispose();
 }
