@@ -9,4 +9,6 @@ public class Match
     [Required] public string MatchScore { get; set; } = default!;
     [Required] public DateOnly MatchDate { get; set; }
     [Required] public int Duration { get; set; }
+
+    public List<Round> Rounds { get; set; }
 }

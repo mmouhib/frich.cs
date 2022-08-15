@@ -11,6 +11,9 @@ public class Person
 
     public List<Match> Matches { get; set; }
 
+    public List<Round> Rounds { get; set; }
+
+
     public override string ToString()
     {
         return $"Person: {PersonId} / {Username} / {Email} / {Password}";
