@@ -1,12 +1,9 @@
 ﻿namespace frich.DataTransferObjects.PersonDto;
 
 // This class treats GET request
-public class PersonGetDto
+public class PersonGetDto : PersonSendDto
 {
     public int PersonId { get; set; }
-    public string Username { get; set; }
-    public string Email { get; set; }
-    public string Password { get; set; }
 
     public override string ToString()
     {
