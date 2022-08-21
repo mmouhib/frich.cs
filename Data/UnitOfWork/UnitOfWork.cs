@@ -1,17 +1,15 @@
 ﻿using frich.Data.Interfaces;
 
 namespace frich.Data.UnitOfWork;
+
 public class UnitOfWork : IUnitOfWork
 {
     private bool _disposedValue;
     private readonly FrichDbContext _context;
-    public IPersonRepo PersonRepository { get; set; }
 
-
-    public UnitOfWork(FrichDbContext context, IPersonRepo personRepo)
+    public UnitOfWork(FrichDbContext context)
     {
         _context = context;
-        PersonRepository = personRepo;
     }
 
     public int Commit()

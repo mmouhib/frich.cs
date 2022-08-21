@@ -2,6 +2,6 @@
 
 namespace frich.Data.Interfaces;
 
-public interface IMatchRepo : IFrichRepo<Match>
+public interface IMatchRepo : IFrichBaseRepo<Match>
 {
 }

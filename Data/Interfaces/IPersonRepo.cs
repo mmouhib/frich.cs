@@ -2,6 +2,6 @@
 
 namespace frich.Data.Interfaces;
 
-public interface IPersonRepo : IFrichRepo<Person>
+public interface IPersonRepo : IFrichBaseRepo<Person>
 {
 }

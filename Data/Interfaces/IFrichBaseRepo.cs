@@ -1,6 +1,6 @@
 ﻿namespace frich.Data.Interfaces;
 
-public interface IFrichRepo<TEntity>
+public interface IFrichBaseRepo<TEntity>
 {
     IEnumerable<TEntity> GetAll();
     TEntity GetById(int id);

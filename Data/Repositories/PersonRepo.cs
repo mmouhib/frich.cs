@@ -1,13 +1,13 @@
 ﻿using frich.Entities;
 using frich.Data.Interfaces;
 
-namespace frich.Data;
+namespace frich.Data.Repositories;
 
-public class SqlFrichRepo : IPersonRepo
+public class PersonRepo : IPersonRepo
 {
     private readonly FrichDbContext _context;
 
-    public SqlFrichRepo(FrichDbContext context)
+    public PersonRepo(FrichDbContext context)
     {
         _context = context;
     }
