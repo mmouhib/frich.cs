@@ -8,7 +8,7 @@ public class Match
     [Key] public int MatchId { get; set; }
     [Required] public string MatchType { get; set; }
     [Required] public string MatchScore { get; set; }
-    [Required] public DateOnly MatchDate { get; set; }
+    [Required] public DateTime MatchDate { get; set; }
     [Required] public int Duration { get; set; }
 
     [Required] [ForeignKey("Person")] public int PersonId { get; set; }
