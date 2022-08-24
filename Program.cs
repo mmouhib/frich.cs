@@ -12,11 +12,13 @@ var builder = WebApplication.CreateBuilder(args);
     builder.Services.AddControllers();
 
     {
-        // add repos & UOW to dep. injection
+        // add unit of work to dep. injection
         builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
+        // add repositories to dep. injection
         builder.Services.AddTransient<IPersonRepo, PersonRepo>();
         builder.Services.AddTransient<IRoundRepo, RoundRepo>();
+        builder.Services.AddTransient<IMatchRepo, MatchRepo>();
     }
 
 
