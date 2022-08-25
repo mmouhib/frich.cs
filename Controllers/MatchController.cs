@@ -6,7 +6,6 @@ using frich.DataTransferObjects.PersonDto;
 using frich.Entities;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace frich.Controllers;
 
@@ -26,7 +25,7 @@ public class MatchController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<IEnumerable<Match>> GetAllMatches()
+    public ActionResult<IEnumerable<MatchGetDto>> GetAllMatches()
     {
         var matches = _repository.GetAll();
         if (matches.Any()) return Ok(_mapper.Map<IEnumerable<MatchGetDto>>(matches));
