@@ -2,14 +2,14 @@
 
 public class MatchPostDto
 {
-    protected MatchPostDto()
+    public MatchPostDto()
     {
-        MatchDate = DateTime.Now;
+        MatchDate = DateTime.Now.ToUniversalTime();
     }
 
     public string MatchType { get; set; }
     public string MatchScore { get; set; }
-    protected DateTime MatchDate { get; set; }
+    public DateTime MatchDate { get; set; }
     public int Duration { get; set; }
     public int PersonId { get; set; }
 
