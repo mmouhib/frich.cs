@@ -10,13 +10,13 @@ namespace frich.Controllers;
 
 [Route("api/participants")]
 [Controller]
-public class PatricipantController : ControllerBase
+public class ParticipantController : ControllerBase
 {
     private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IParticipantRepo _repository;
 
-    public PatricipantController(IMapper mapper, IUnitOfWork uow, IParticipantRepo repo)
+    public ParticipantController(IMapper mapper, IUnitOfWork uow, IParticipantRepo repo)
     {
         _mapper = mapper;
         _unitOfWork = uow;
