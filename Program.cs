@@ -19,6 +19,7 @@ var builder = WebApplication.CreateBuilder(args);
         builder.Services.AddTransient<IPersonRepo, PersonRepo>();
         builder.Services.AddTransient<IRoundRepo, RoundRepo>();
         builder.Services.AddTransient<IMatchRepo, MatchRepo>();
+        builder.Services.AddTransient<IParticipantRepo, ParticipantRepo>();
     }
 
 
