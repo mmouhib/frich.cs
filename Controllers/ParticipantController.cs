@@ -42,8 +42,18 @@ public class ParticipantController : ControllerBase
     [HttpPost]
     public ActionResult<ParticipantGetDto> AddParticipant(ParticipantPostDto postRequestBody)
     {
+        Console.WriteLine("---------------------------------------------------");
+        Console.WriteLine("---------------------------------------------------");
+        Console.WriteLine("---------------------------------------------------");
+        Console.WriteLine("---------------------------------------------------");
+        Console.WriteLine(postRequestBody);
+        Console.WriteLine("---------------------------------------------------");
+        Console.WriteLine("---------------------------------------------------");
+        Console.WriteLine("---------------------------------------------------");
+        Console.WriteLine("---------------------------------------------------");
         var participantToAdd = _mapper.Map<Participant>(postRequestBody);
         _repository.Add(participantToAdd);
+        Console.WriteLine(participantToAdd);
         _unitOfWork.Commit();
         var dataToReturn = _mapper.Map<ParticipantGetDto>(participantToAdd);
         return CreatedAtRoute(nameof(GetParticipantById), new {id = dataToReturn.ParticipantId}, dataToReturn);

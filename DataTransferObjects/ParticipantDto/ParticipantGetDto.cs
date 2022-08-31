@@ -1,6 +1,6 @@
 ﻿namespace frich.DataTransferObjects.ParticipantDto;
 
-public class ParticipantGetDto : ParticipantPostDto
+public class ParticipantGetDto
 {
     public int ParticipantId { get; set; }
 
