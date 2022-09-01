@@ -2,10 +2,5 @@
 
 public class ParticipantPostDto
 {
-    public string Name { get; set; }
-
-    public override string ToString()
-    {
-        return $" {this.GetType().Name}: {Name}";
-    }
+    public string ParticipantName { get; set; }
 }

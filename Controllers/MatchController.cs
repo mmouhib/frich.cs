@@ -32,6 +32,7 @@ public class MatchController : ControllerBase
         return NotFound();
     }
 
+
     [HttpGet("{id}", Name = "GetMatchById")]
     public ActionResult<MatchGetDto> GetMatchById(int id)
     {

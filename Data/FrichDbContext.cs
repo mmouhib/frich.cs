@@ -13,9 +13,8 @@ public class FrichDbContext : DbContext
     public DbSet<Person> Persons { get; set; }
     public DbSet<Match> Matches { get; set; }
     public DbSet<Round> Rounds { get; set; }
-
     public DbSet<Participant> Participants { get; set; }
-    // public DbSet<ParticipantRound> ParticipantRounds { get; set; }
+
 
     // protected override void OnModelCreating(ModelBuilder modelBuilder)
     // {
