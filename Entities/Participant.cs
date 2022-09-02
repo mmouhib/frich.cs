@@ -6,4 +6,6 @@ public class Participant
 {
     [Key] public int ParticipantId { get; set; }
     [Required] public string participantName { get; set; }
+
+    public List<Round> Rounds { get; set; }
 }

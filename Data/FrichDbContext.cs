@@ -14,10 +14,11 @@ public class FrichDbContext : DbContext
     public DbSet<Match> Matches { get; set; }
     public DbSet<Round> Rounds { get; set; }
     public DbSet<Participant> Participants { get; set; }
+    public DbSet<ParticipantRounds> ParticipantsRounds { get; set; }
 
 
-    // protected override void OnModelCreating(ModelBuilder modelBuilder)
-    // {
-    //     modelBuilder.Entity<ParticipantRound>().HasKey(p => new {p.ParticipantId, p.RoundId});
-    // }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<ParticipantRounds>().HasKey(p => new { p.ParticipantId, p.RoundId });
+    }
 }

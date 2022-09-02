@@ -11,4 +11,7 @@ public class Round
 
     [Required] [ForeignKey("Person")] public int PersonId { get; set; }
     [Required] [ForeignKey("Match")] public int MatchId { get; set; }
+
+    public List<Participant> Participants { get; set; }
+
 }
