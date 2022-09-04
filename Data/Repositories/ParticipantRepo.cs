@@ -1,9 +1,10 @@
 ﻿using frich.Data.Interfaces;
+using frich.DataTransferObjects.ParticipantRoundsDto;
 using frich.Entities;
 
 namespace frich.Data.Repositories;
 
-public class ParticipantRepo:IParticipantRepo
+public class ParticipantRepo : IParticipantRepo
 {
     public readonly FrichDbContext _context;
 

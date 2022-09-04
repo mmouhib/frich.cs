@@ -49,7 +49,7 @@ public class MatchController : ControllerBase
         _unitOfWork.Commit();
 
         MatchGetDto matchToReturn = _mapper.Map<MatchGetDto>(person);
-        return CreatedAtRoute(nameof(GetMatchById), new {id = matchToReturn.MatchId}, matchToReturn);
+        return CreatedAtRoute(nameof(GetMatchById), new { id = matchToReturn.MatchId }, matchToReturn);
     }
 
     [HttpPut("{id}")]

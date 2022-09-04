@@ -2,9 +2,12 @@
 
 namespace frich.Data.Interfaces;
 
-public interface IParticipantRoundsRepo : IFrichBaseRepo<ParticipantRounds>
+public interface IParticipantRoundsRepo
 {
-    ParticipantRounds GetById(int id, int id2);
-    ParticipantRounds GetByParticipantId(int id);
-    ParticipantRounds GetByRoundId(int id);
+    public void Add(ParticipantRounds entityInstance);
+    public void Delete(ParticipantRounds entityInstance);
+    public IEnumerable<ParticipantRounds> GetAll();
+
+    public IEnumerable<ParticipantRounds> GetRoundsById(int firstId, int secondId);
+    public IEnumerable<ParticipantRounds> GetRoundsByParticipantId(int id);
 }

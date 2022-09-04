@@ -1,5 +1,6 @@
 ﻿namespace frich.DataTransferObjects.ParticipantRoundsDto;
 
-public class ParticipantRoundsPostDto:ParticipantRoundsGetDto
+public class ParticipantRoundsPostDto
 {
+    public int Score { get; set; }
 }

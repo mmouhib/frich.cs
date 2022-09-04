@@ -5,11 +5,11 @@ using frich.Entities;
 
 namespace frich.Profiles;
 
-public class ParticipantProfile:Profile
+public class ParticipantProfile : Profile
 {
-	public ParticipantProfile()
-	{
-		CreateMap<Participant, ParticipantGetDto>();
+    public ParticipantProfile()
+    {
+        CreateMap<Participant, ParticipantGetDto>();
         CreateMap<ParticipantPostDto, Participant>();
         CreateMap<Participant, ParticipantPostDto>();
     }

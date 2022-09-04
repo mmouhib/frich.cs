@@ -5,7 +5,7 @@ namespace frich.Data.Repositories;
 
 public class ParticipantRoundsRepo : IParticipantRoundsRepo
 {
-    private FrichDbContext _context;
+    private readonly FrichDbContext _context;
 
     public ParticipantRoundsRepo(FrichDbContext context)
     {
@@ -27,29 +27,17 @@ public class ParticipantRoundsRepo : IParticipantRoundsRepo
         return _context.ParticipantsRounds.ToList();
     }
 
-    public ParticipantRounds GetById(int participantId, int roundId)
+    public IEnumerable<ParticipantRounds> GetRoundsByParticipantId(int participantId)
     {
-        return _context.ParticipantsRounds.FirstOrDefault(data => data.ParticipantId == participantId && data.RoundId == roundId);
+        var participantRounds = _context.ParticipantsRounds.ToList();
+        return participantRounds.FindAll(val => val.ParticipantId == participantId);
     }
 
-    // this method is called like this because it is implemented from the
-    // parent interface (IFrichBaseRepo) so it is identical to "GetByParticipantId".
-    public ParticipantRounds GetById(int id)
+    public IEnumerable<ParticipantRounds> GetRoundsById(int participantId, int roundId)
     {
-        return _context.ParticipantsRounds.FirstOrDefault(data => data.ParticipantId == id);
-    }
-
-    public ParticipantRounds GetByParticipantId(int id)
-    {
-        return GetById(id);
-    }
-
-    public ParticipantRounds GetByRoundId(int id)
-    {
-        return _context.ParticipantsRounds.FirstOrDefault(data => data.RoundId == id);
-    }
-
-    public void Update(ParticipantRounds entityInstance)
-    {
+        var participantRounds = _context.ParticipantsRounds.ToList();
+        return participantRounds.FindAll(
+            val => val.ParticipantId == participantId && val.RoundId == roundId
+        );
     }
 }
