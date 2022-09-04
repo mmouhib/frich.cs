@@ -1,4 +1,4 @@
-﻿namespace frich.DataTransferObjects.MatchDto;
+﻿namespace frich.Dto;
 
 public class MatchPostDto
 {
@@ -11,4 +11,9 @@ public class MatchPostDto
     public DateTime MatchDate { get; set; }
     public int Duration { get; set; }
     public int PersonId { get; set; }
+}
+
+public class MatchGetDto : MatchPostDto
+{
+    public int MatchId { get; set; }
 }

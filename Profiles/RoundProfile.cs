@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using frich.DataTransferObjects.RoundDto;
+using frich.Dto;
 using frich.Entities;
 
 namespace frich.Profiles;

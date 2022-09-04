@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using frich.DataTransferObjects.PersonDto;
+using frich.Dto;
 
 namespace frich.Validators.PersonValidators;
 

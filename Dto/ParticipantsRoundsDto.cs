@@ -1,6 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿namespace frich.Dto;
 
-namespace frich.DataTransferObjects.ParticipantRoundsDto;
+public class ParticipantRoundsPostDto
+{
+    public int Score { get; set; }
+}
 
 public class ParticipantRoundsGetDto : ParticipantRoundsPostDto
 {

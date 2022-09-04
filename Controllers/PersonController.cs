@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using frich.Data.Interfaces;
 using frich.Data.UnitOfWork;
-using frich.DataTransferObjects.PersonDto;
+using frich.Dto;
 using frich.Entities;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -56,7 +56,7 @@ public class PersonController : ControllerBase
         PersonGetDto getResult = _mapper.Map<PersonGetDto>(mappedPerson);
 
         // CreatedAtRoute generates the request URI after making a POST request.
-        return CreatedAtRoute(nameof(GetPersonById), new {id = getResult.PersonId}, getResult);
+        return CreatedAtRoute(nameof(GetPersonById), new { id = getResult.PersonId }, getResult);
     }
 
 

@@ -1,5 +1,5 @@
 ﻿using frich.Data.Interfaces;
-using frich.DataTransferObjects.ParticipantRoundsDto;
+using frich.Dto;
 using frich.Entities;
 
 namespace frich.Data.Repositories;

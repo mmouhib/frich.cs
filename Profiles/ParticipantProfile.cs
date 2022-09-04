@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
-using frich.DataTransferObjects.MatchDto;
-using frich.DataTransferObjects.ParticipantDto;
+using frich.Dto;
 using frich.Entities;
 
 namespace frich.Profiles;

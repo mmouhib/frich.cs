@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using frich.Data.Interfaces;
 using frich.Data.UnitOfWork;
-using frich.DataTransferObjects.ParticipantRoundsDto;
+using frich.Dto;
 using frich.Entities;
 using Microsoft.AspNetCore.Mvc;
 
