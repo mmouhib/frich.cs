@@ -8,6 +8,6 @@ public interface IParticipantRoundsRepo
     public void Delete(ParticipantRounds entityInstance);
     public IEnumerable<ParticipantRounds> GetAll();
 
-    public IEnumerable<ParticipantRounds> GetRoundsById(int firstId, int secondId);
+    public ParticipantRounds GetRoundsById(int firstId, int secondId);
     public IEnumerable<ParticipantRounds> GetRoundsByParticipantId(int id);
 }

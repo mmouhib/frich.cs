@@ -33,10 +33,10 @@ public class ParticipantRoundsRepo : IParticipantRoundsRepo
         return participantRounds.FindAll(val => val.ParticipantId == participantId);
     }
 
-    public IEnumerable<ParticipantRounds> GetRoundsById(int participantId, int roundId)
+    public ParticipantRounds GetRoundsById(int participantId, int roundId)
     {
         var participantRounds = _context.ParticipantsRounds.ToList();
-        return participantRounds.FindAll(
+        return participantRounds.FirstOrDefault(
             val => val.ParticipantId == participantId && val.RoundId == roundId
         );
     }

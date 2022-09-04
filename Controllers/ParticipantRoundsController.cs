@@ -49,5 +49,23 @@ public class ParticipantRoundsController : ControllerBase
         );
     }
 
-    // todo: add get method by both participantId and roundId
+    [HttpGet("{participantId}/rounds/{roundId}")]
+    public ActionResult GetRound(int participantId, int roundId)
+    {
+        var data = _repository.GetRoundsById(participantId, roundId);
+        if (data == null) return NotFound();
+        return Ok(_mapper.Map<ParticipantRoundsGetDto>(data));
+    }
+
+    // todo: add patch and put requests support.
+
+    [HttpDelete("{participantId}/rounds/{roundId}")]
+    public ActionResult<IEnumerable<ParticipantRoundsGetDto>> DeleteRound(int participantId, int roundId)
+    {
+        var data = _repository.GetRoundsById(participantId, roundId);
+        if (data == null) return NotFound();
+        _repository.Delete(data);
+        _unitOfWork.Commit();
+        return NoContent();
+    }
 }
