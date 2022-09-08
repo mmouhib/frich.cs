@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace frich.Controllers;
 
 [Route("api/persons")]
-[ApiController]
+[ApiController] // this attribute applies model validations automatically without the need of "ModelState.IsValid".
 public class PersonController : ControllerBase
 {
     private readonly IPersonRepo _repository;
