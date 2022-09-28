@@ -3,6 +3,7 @@ using frich.Data.Interfaces;
 using frich.Data.UnitOfWork;
 using frich.Dto;
 using frich.Entities;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace frich.Controllers;
@@ -57,8 +58,6 @@ public class ParticipantRoundsController : ControllerBase
         return Ok(_mapper.Map<ParticipantRoundsGetDto>(data));
     }
 
-    // todo: add patch and put requests support.
-
     [HttpDelete("{participantId}/rounds/{roundId}")]
     public ActionResult<IEnumerable<ParticipantRoundsGetDto>> DeleteRound(int participantId, int roundId)
     {
@@ -66,6 +65,36 @@ public class ParticipantRoundsController : ControllerBase
         if (data == null) return NotFound();
         _repository.Delete(data);
         _unitOfWork.Commit();
+        return NoContent();
+    }
+
+    [HttpPut("{participantId}/rounds/{roundId}")]
+    public ActionResult UpdateRound(int participantId, int roundId, ParticipantRoundsPostDto requestBody)
+    {
+        var dataFromRepo = _repository.GetRoundsById(participantId, roundId);
+        if (dataFromRepo == null) return NotFound();
+
+        _mapper.Map(requestBody, dataFromRepo);
+        _unitOfWork.Commit();
+
+        return NoContent();
+    }
+
+    [HttpPatch("{participantId}/rounds/{roundId}")]
+    public ActionResult PatchParticipantRounds(int participantId, int roundId,
+        JsonPatchDocument<ParticipantRoundsPostDto> requestBody)
+    {
+        var dataFromRepo = _repository.GetRoundsById(participantId, roundId);
+        if (dataFromRepo == null) return NotFound();
+
+        var mappedData = _mapper.Map<ParticipantRoundsPostDto>(dataFromRepo);
+        if (!TryValidateModel(mappedData)) return ValidationProblem(ModelState);
+
+        requestBody.ApplyTo(mappedData, ModelState);
+
+        _mapper.Map(mappedData, dataFromRepo);
+        _unitOfWork.Commit();
+
         return NoContent();
     }
 }
